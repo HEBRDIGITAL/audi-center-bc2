@@ -2,15 +2,13 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-NW3NJSTP');</script>
-    <!-- End Google Tag Manager -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audi Q5 SUV | Audi Center Balneário Camboriú</title>
+    <meta name="description" content="Novo Audi Q5 SUV. Preencha o formulário e fale direto com a Audi Center Balneário Camboriú.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code (ID: 1558343924372915) -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -28,11 +26,16 @@
     /></noscript>
     <!-- End Meta Pixel Code -->
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audi Q5 SUV | Audi Center Balneário Camboriú</title>
-    <meta name="description" content="Novo Audi Q5 SUV. Preencha o formulário e fale direto com a Audi Center Balneário Camboriú.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Ads gtag (ID: AW-10829753627) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10829753627"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-10829753627');
+    </script>
+    <!-- End Google Ads gtag -->
+
     <style>
         :root {
             --black: #000000;
@@ -495,10 +498,6 @@
     </style>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NW3NJSTP"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
     <!-- HEADER -->
     <header class="header">
@@ -848,15 +847,12 @@
             _formSent = true;
             try { fetch(SHEET_URL + '?' + qs, { method: 'GET', mode: 'no-cors', keepalive: true }); } catch(e) {}
 
-            // Meta Pixel — Lead conversion event
-            if (typeof fbq === 'function') {
-                fbq('track', 'Lead', {
-                    content_name: modelo,
-                    content_category: 'Audi Lead',
-                    value: 0,
-                    currency: 'BRL'
-                });
-            }
+            // ===== CONVERSION TRACKING =====
+            // Meta Pixel — Lead event
+            try { fbq('track', 'Lead', { content_name: modelo, content_category: 'Audi' }); } catch(e) {}
+            // Google Ads — Conversion event (adicione o CONVERSION_LABEL quando criar a conversão no Google Ads)
+            try { gtag('event', 'conversion', { 'send_to': 'AW-10829753627/CONVERSION_LABEL' }); } catch(e) {}
+            // ===== END CONVERSION TRACKING =====
 
             // Redirect to WhatsApp after 1s
             setTimeout(function() {
