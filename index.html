@@ -174,6 +174,210 @@
             z-index: 1;
         }
 
+        /* ===== MODELS SECTION ===== */
+        .models-section {
+            background: var(--dark);
+            padding: 80px 24px 56px;
+        }
+        .models-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .models-filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+        .filter-btn {
+            padding: 7px 18px;
+            font-family: 'Barlow', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 99px;
+            border: 1px solid var(--gray-border);
+            background: transparent;
+            color: var(--gray-light);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover {
+            border-color: rgba(255,255,255,0.4);
+            color: var(--white);
+        }
+        .filter-btn.active {
+            background: var(--white);
+            border-color: var(--white);
+            color: var(--black);
+        }
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        .model-card {
+            background: var(--dark-card);
+            border: 1px solid var(--gray-border);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.25s, transform 0.2s;
+        }
+        .model-card:hover {
+            border-color: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+        .model-card.selected {
+            border-color: var(--red);
+        }
+        .model-card.hidden {
+            display: none;
+        }
+        .model-card-inner {
+            padding: 16px 16px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .model-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 0.2px;
+        }
+        .model-img-wrap {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-dark);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .model-select-btn {
+            width: 100%;
+            padding: 10px;
+            font-family: 'Barlow', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--gray-dark);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .model-select-btn:hover {
+            background: var(--gray-mid);
+        }
+        .model-card.selected .model-select-btn {
+            background: var(--red);
+        }
+        @media (max-width: 600px) {
+            .models-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ===== MODEL DETAIL ===== */
+        .model-detail {
+            max-width: 1100px;
+            margin: 32px auto 0;
+            border: 1px solid var(--gray-border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: none;
+            animation: fadeUp 0.4s ease-out;
+        }
+        .model-detail.visible { display: block; }
+        .model-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            padding: 32px 36px;
+            background: var(--dark-card);
+            border-bottom: 1px solid var(--gray-border);
+        }
+        .model-detail-img {
+            width: 280px;
+            height: 160px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        .model-detail-name {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+        .detail-highlights {
+            display: flex;
+            gap: 36px;
+            flex-wrap: wrap;
+        }
+        .highlight-item { display: flex; flex-direction: column; gap: 4px; }
+        .h-value { font-size: 20px; font-weight: 700; color: var(--white); }
+        .h-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--gray-text); }
+        .detail-accordion { background: var(--dark-card); }
+        .accordion-item { border-top: 1px solid var(--gray-border); }
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 36px;
+            cursor: pointer;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .accordion-header:hover { background: rgba(255,255,255,0.03); }
+        .accordion-title { font-size: 15px; font-weight: 500; color: var(--white); }
+        .accordion-right { display: flex; align-items: center; gap: 10px; color: var(--gray-text); font-size: 12px; letter-spacing: 1px; }
+        .accordion-arrow { transition: transform 0.3s; display: inline-block; }
+        .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+        .accordion-body {
+            display: none;
+            padding: 4px 36px 20px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+        }
+        .accordion-item.open .accordion-body { display: grid; }
+        .spec-row { display: flex; flex-direction: column; gap: 3px; }
+        .spec-label { font-size: 10px; color: var(--gray-text); text-transform: uppercase; letter-spacing: 1.5px; }
+        .spec-value { font-size: 15px; color: var(--white); font-weight: 500; }
+        .spec-list-item { font-size: 14px; color: rgba(255,255,255,0.8); padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .detail-cta-wrap {
+            padding: 24px 36px;
+            background: var(--dark-card);
+            border-top: 1px solid var(--gray-border);
+        }
+        .detail-cta {
+            width: 100%;
+            padding: 20px;
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--red);
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.25s, letter-spacing 0.25s;
+        }
+        .detail-cta:hover { background: var(--red-hover); letter-spacing: 4px; }
+        @media (max-width: 700px) {
+            .model-detail-header { flex-direction: column; gap: 20px; align-items: flex-start; }
+            .model-detail-img { width: 100%; height: 140px; }
+            .accordion-body { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .accordion-body { grid-template-columns: 1fr; }
+        }
+
         /* ===== FORM SECTION ===== */
         .form-section {
             background: var(--dark);
@@ -512,6 +716,155 @@
         </div>
     </header>
     
+    <!-- MODELOS -->
+    <section class="models-section">
+        <div class="models-wrapper">
+            <div class="models-filters">
+                <button class="filter-btn active" data-filter="todos">Todos</button>
+                <button class="filter-btn" data-filter="sport">Sport</button>
+                <button class="filter-btn" data-filter="suv">SUV</button>
+                <button class="filter-btn" data-filter="sedan">Sedan</button>
+                <button class="filter-btn" data-filter="sportback">Sportback</button>
+            </div>
+            <div class="models-grid" id="modelsGrid">
+                <div class="model-card" data-cat="sedan sport" data-model="Audi A3 Sedan">
+                    <div class="model-card-inner">
+                        <span class="model-name">Audi A3</span>
+                        <div class="model-img-wrap">
+                            <img src="https://www.audi.com.br/content/dam/nemo/models/a3/a3-sedan/my-2024/1920x1080-AA2_181111.jpg" alt="Audi A3 Sedan" onerror="this.style.opacity='0'">
+                        </div>
+                        <button class="model-select-btn" onclick="selectModel('Audi A3 Sedan')">Selecionar</button>
+                    </div>
+                </div>
+                <div class="model-card" data-cat="sedan sport" data-model="Audi A4 Sedan">
+                    <div class="model-card-inner">
+                        <span class="model-name">Audi A4</span>
+                        <div class="model-img-wrap">
+                            <img src="https://www.audi.com.br/content/dam/nemo/models/a4/a4/my-2023/1920x1080-AA4_231001.jpg" alt="Audi A4 Sedan" onerror="this.style.opacity='0'">
+                        </div>
+                        <button class="model-select-btn" onclick="selectModel('Audi A4 Sedan')">Selecionar</button>
+                    </div>
+                </div>
+                <div class="model-card" data-cat="sportback sport" data-model="Audi A5 Sportback">
+                    <div class="model-card-inner">
+                        <span class="model-name">Audi A5</span>
+                        <div class="model-img-wrap">
+                            <img src="https://www.audi.com.br/content/dam/nemo/models/a5/a5-sportback/my-2024/1920x1080-AA5_231101.jpg" alt="Audi A5 Sportback" onerror="this.style.opacity='0'">
+                        </div>
+                        <button class="model-select-btn" onclick="selectModel('Audi A5 Sportback')">Selecionar</button>
+                    </div>
+                </div>
+                <div class="model-card" data-cat="suv" data-model="Audi Q3">
+                    <div class="model-card-inner">
+                        <span class="model-name">Audi Q3</span>
+                        <div class="model-img-wrap">
+                            <img src="https://www.audi.com.br/content/dam/nemo/models/q3/q3/my-2024/1920x1080-AQ3_231001.jpg" alt="Audi Q3" onerror="this.style.opacity='0'">
+                        </div>
+                        <button class="model-select-btn" onclick="selectModel('Audi Q3')">Selecionar</button>
+                    </div>
+                </div>
+                <div class="model-card" data-cat="suv sportback" data-model="Audi Q3 Sportback">
+                    <div class="model-card-inner">
+                        <span class="model-name">Audi Q3 Sportback</span>
+                        <div class="model-img-wrap">
+                            <img src="https://www.audi.com.br/content/dam/nemo/models/q3/q3-sportback/my-2024/1920x1080-AQ3SB_231001.jpg" alt="Audi Q3 Sportback" onerror="this.style.opacity='0'">
+                        </div>
+                        <button class="model-select-btn" onclick="selectModel('Audi Q3 Sportback')">Selecionar</button>
+                    </div>
+                </div>
+                <div class="model-card selected" data-cat="suv" data-model="Audi Q5 SUV">
+                    <div class="model-card-inner">
+                        <span class="model-name">Audi Q5 SUV</span>
+                        <div class="model-img-wrap">
+                            <img src="https://www.audi.com.br/content/dam/nemo/models/q5/q5/my-2024/1920x1080-AQ5_231001.jpg" alt="Audi Q5 SUV" onerror="this.style.opacity='0'">
+                        </div>
+                        <button class="model-select-btn" onclick="selectModel('Audi Q5 SUV')">Selecionar</button>
+                    </div>
+                </div>
+                <div class="model-card" data-cat="suv sportback" data-model="Audi Q5 Sportback">
+                    <div class="model-card-inner">
+                        <span class="model-name">Audi Q5 Sportback</span>
+                        <div class="model-img-wrap">
+                            <img src="https://www.audi.com.br/content/dam/nemo/models/q5/q5-sportback/my-2024/1920x1080-AQ5SB_231001.jpg" alt="Audi Q5 Sportback" onerror="this.style.opacity='0'">
+                        </div>
+                        <button class="model-select-btn" onclick="selectModel('Audi Q5 Sportback')">Selecionar</button>
+                    </div>
+                </div>
+                <div class="model-card" data-cat="suv" data-model="Audi Q7">
+                    <div class="model-card-inner">
+                        <span class="model-name">Audi Q7</span>
+                        <div class="model-img-wrap">
+                            <img src="https://www.audi.com.br/content/dam/nemo/models/q7/q7/my-2024/1920x1080-AQ7_231001.jpg" alt="Audi Q7" onerror="this.style.opacity='0'">
+                        </div>
+                        <button class="model-select-btn" onclick="selectModel('Audi Q7')">Selecionar</button>
+                    </div>
+                </div>
+                <div class="model-card" data-cat="suv sport" data-model="Audi Q8">
+                    <div class="model-card-inner">
+                        <span class="model-name">Audi Q8</span>
+                        <div class="model-img-wrap">
+                            <img src="https://www.audi.com.br/content/dam/nemo/models/q8/q8/my-2024/1920x1080-AQ8_231001.jpg" alt="Audi Q8" onerror="this.style.opacity='0'">
+                        </div>
+                        <button class="model-select-btn" onclick="selectModel('Audi Q8')">Selecionar</button>
+                    </div>
+                </div>
+                <div class="model-card" data-cat="sport sedan" data-model="Audi RS3">
+                    <div class="model-card-inner">
+                        <span class="model-name">Audi RS3</span>
+                        <div class="model-img-wrap">
+                            <img src="https://www.audi.com.br/content/dam/nemo/models/rs3/rs3-sedan/my-2024/1920x1080-ARS3_231001.jpg" alt="Audi RS3" onerror="this.style.opacity='0'">
+                        </div>
+                        <button class="model-select-btn" onclick="selectModel('Audi RS3')">Selecionar</button>
+                    </div>
+                </div>
+                <div class="model-card" data-cat="suv sport" data-model="Audi RS Q8">
+                    <div class="model-card-inner">
+                        <span class="model-name">Audi RS Q8</span>
+                        <div class="model-img-wrap">
+                            <img src="https://www.audi.com.br/content/dam/nemo/models/rsq8/rsq8/my-2024/1920x1080-ARSQ8_231001.jpg" alt="Audi RS Q8" onerror="this.style.opacity='0'">
+                        </div>
+                        <button class="model-select-btn" onclick="selectModel('Audi RS Q8')">Selecionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <!-- FICHA TÉCNICA -->
+            <div id="modelDetail" class="model-detail">
+                <div class="model-detail-header">
+                    <img id="detailImg" class="model-detail-img" src="" alt="">
+                    <div>
+                        <h2 id="detailName" class="model-detail-name"></h2>
+                        <div class="detail-highlights">
+                            <div class="highlight-item">
+                                <span class="h-value" id="detailPower"></span>
+                                <span class="h-label">Potência</span>
+                            </div>
+                            <div class="highlight-item">
+                                <span class="h-value" id="detailZero"></span>
+                                <span class="h-label">0–100 km/h</span>
+                            </div>
+                            <div class="highlight-item">
+                                <span class="h-value" id="detailTracao"></span>
+                                <span class="h-label">Tração</span>
+                            </div>
+                            <div class="highlight-item">
+                                <span class="h-value" id="detailPreco"></span>
+                                <span class="h-label">A partir de</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-accordion" id="detailAccordion"></div>
+                <div class="detail-cta-wrap">
+                    <button class="detail-cta" onclick="document.querySelector('.form-section').scrollIntoView({behavior:'smooth'})">
+                        Quero uma proposta para este modelo →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FORM -->
     <section class="form-section">
         <div class="form-wrapper">
@@ -520,17 +873,17 @@
             <form id="audiForm" novalidate>
                 <div class="field">
                     <label class="field-label">Nome</label>
-                    <input type="text" id="f_nome" class="field-input" required autocomplete="given-name">
+                    <input type="text" id="f_nome" class="field-input" autocomplete="given-name">
                 </div>
 
                 <div class="field">
                     <label class="field-label">Sobrenome</label>
-                    <input type="text" id="f_sobrenome" class="field-input" required autocomplete="family-name">
+                    <input type="text" id="f_sobrenome" class="field-input" autocomplete="family-name">
                 </div>
 
                 <div class="field">
                     <label class="field-label">Gênero</label>
-                    <select id="f_genero" class="field-select" required>
+                    <select id="f_genero" class="field-select">
                         <option value="" disabled selected>Selecione</option>
                         <option value="Masculino">Masculino</option>
                         <option value="Feminino">Feminino</option>
@@ -577,29 +930,29 @@
                             <span class="phone-ddi-arrow"></span>
                         </div>
                         <span class="phone-ddi-sep"></span>
-                        <input type="tel" id="f_telefone" class="field-input phone-input" placeholder="(00) 00000-0000" required autocomplete="tel">
+                        <input type="tel" id="f_telefone" class="field-input phone-input" placeholder="(00) 00000-0000" autocomplete="tel">
                     </div>
                 </div>
 
                 <div class="field">
                     <label class="field-label">E-mail</label>
-                    <input type="email" id="f_email" class="field-input" required autocomplete="email">
+                    <input type="email" id="f_email" class="field-input" autocomplete="email">
                 </div>
 
                 <div class="field-row">
                     <div class="field">
                         <label class="field-label">CPF</label>
-                        <input type="text" id="f_cpf" class="field-input" placeholder="000.000.000-00" required>
+                        <input type="text" id="f_cpf" class="field-input" placeholder="000.000.000-00">
                     </div>
                     <div class="field">
                         <label class="field-label">CEP</label>
-                        <input type="text" id="f_cep" class="field-input" placeholder="00000-000" required>
+                        <input type="text" id="f_cep" class="field-input" placeholder="00000-000">
                     </div>
                 </div>
 
                 <div class="field">
                     <label class="field-label">Pretensão de compra</label>
-                    <select id="f_pretensao" class="field-select" required>
+                    <select id="f_pretensao" class="field-select">
                         <option value="" disabled selected>Selecione</option>
                         <option value="Até 1 mês">Até 1 mês</option>
                         <option value="Até 2 meses">Até 2 meses</option>
@@ -717,6 +1070,214 @@
         }
 
         setupPhoneMask();
+
+        // ===== CAR IMAGES =====
+        var _imgMap = {
+            'Audi A3 Sedan':      'https://cloudfront.alpes.one/public/697/d1c/848/697d1c84823c3305623028.webp',
+            'Audi A4 Sedan':      'https://cloudfront.alpes.one/public/697/d1c/809/697d1c809297f786880226.webp',
+            'Audi A5 Sportback':  'https://cloudfront.alpes.one/public/697/d1c/809/697d1c809297f786880226.webp',
+            'Audi Q3':            'https://cloudfront.alpes.one/public/697/d1c/985/697d1c9855f8c483457199.webp',
+            'Audi Q3 Sportback':  'https://cloudfront.alpes.one/public/697/d1c/9d8/697d1c9d811a5957662857.webp',
+            'Audi Q5 SUV':        'https://cloudfront.alpes.one/public/697/d1c/a1d/697d1ca1d1392939528924.webp',
+            'Audi Q5 Sportback':  'https://cloudfront.alpes.one/public/697/d1c/a6a/697d1ca6a0147883309157.webp',
+            'Audi Q7':            'https://cloudfront.alpes.one/public/697/d1c/b61/697d1cb61a753082661716.webp',
+            'Audi Q8':            'https://cloudfront.alpes.one/public/697/d1c/bab/697d1cbab4a5d557997583.webp',
+            'Audi RS3':           'https://cloudfront.alpes.one/public/697/d1c/8e1/697d1c8e1524a961789310.webp',
+            'Audi RS Q8':         'https://cloudfront.alpes.one/public/697/d1c/bfe/697d1cbfe5c6a737263138.webp'
+        };
+        (function() {
+            document.querySelectorAll('.model-card').forEach(function(card) {
+                var model = card.dataset.model;
+                var src = _imgMap[model];
+                var img = card.querySelector('.model-img-wrap img');
+                if (img && src) {
+                    img.src = src;
+                    img.style.cssText = 'width:100%;height:100%;object-fit:contain;';
+                }
+            });
+        })();
+
+        // ===== MODEL SPECS DATA =====
+        var modelSpecs = {
+            'Audi A3 Sedan': {
+                potencia: '150 cv', torque: '250 Nm', zero100: '8,2 s', velMax: '224 km/h',
+                motor: '1.4 TFSI', transmissao: 'S tronic 7 marchas', tracao: 'Dianteira (FWD)',
+                preco: 'R$ 189.990',
+                versoes: ['A3 Sedan 35 TFSI S tronic'],
+                destaques: ['Audi virtual cockpit', 'Faróis full LED', 'Central multimídia 10,1"', 'Assistente de faixa']
+            },
+            'Audi A4 Sedan': {
+                potencia: '190 cv', torque: '320 Nm', zero100: '7,3 s', velMax: '240 km/h',
+                motor: '2.0 TFSI', transmissao: 'S tronic 7 marchas', tracao: 'Dianteira (FWD)',
+                preco: 'R$ 289.990',
+                versoes: ['A4 Sedan 40 TFSI S tronic'],
+                destaques: ['Faróis Matrix LED', 'Audi virtual cockpit plus', 'MMI Navigation plus', 'Câmera de ré']
+            },
+            'Audi A5 Sportback': {
+                potencia: '204 cv', torque: '320 Nm', zero100: '6,9 s', velMax: '250 km/h',
+                motor: '2.0 TFSI', transmissao: 'S tronic 7 marchas', tracao: 'Dianteira (FWD)',
+                preco: 'R$ 339.990',
+                versoes: ['A5 Sportback 40 TFSI S tronic'],
+                destaques: ['Design Sportback exclusivo', 'Faróis Matrix LED', 'Teto solar panorâmico', 'Bancos em couro']
+            },
+            'Audi Q3': {
+                potencia: '150 cv', torque: '250 Nm', zero100: '8,9 s', velMax: '218 km/h',
+                motor: '1.4 TFSI', transmissao: 'S tronic 6 marchas', tracao: 'Dianteira (FWD)',
+                preco: 'R$ 259.990',
+                versoes: ['Q3 35 TFSI S tronic'],
+                destaques: ['SUV compacto premium', 'Audi virtual cockpit', 'Sensor de estacionamento', 'Partida remota']
+            },
+            'Audi Q3 Sportback': {
+                potencia: '150 cv', torque: '250 Nm', zero100: '8,9 s', velMax: '218 km/h',
+                motor: '1.4 TFSI', transmissao: 'S tronic 6 marchas', tracao: 'Dianteira (FWD)',
+                preco: 'R$ 279.990',
+                versoes: ['Q3 Sportback 35 TFSI S tronic'],
+                destaques: ['Design Coupé-SUV', 'Teto inclinado esportivo', 'Faróis full LED', 'Rodas aro 18"']
+            },
+            'Audi Q5 SUV': {
+                potencia: '265 cv', torque: '400 Nm', zero100: '5,9 s', velMax: '250 km/h',
+                motor: '2.0 TFSI', transmissao: 'S tronic 7 marchas', tracao: 'Quattro (4×4)',
+                preco: 'R$ 419.990',
+                versoes: ['Q5 45 TFSI quattro S tronic', 'SQ5 3.0 TFSI quattro'],
+                destaques: ['Tração integral quattro', 'Suspensão adaptativa', 'Banco de couro Nappa', 'Head-up display', 'Rodas aro 20"']
+            },
+            'Audi Q5 Sportback': {
+                potencia: '265 cv', torque: '400 Nm', zero100: '5,9 s', velMax: '250 km/h',
+                motor: '2.0 TFSI', transmissao: 'S tronic 7 marchas', tracao: 'Quattro (4×4)',
+                preco: 'R$ 449.990',
+                versoes: ['Q5 Sportback 45 TFSI quattro S tronic'],
+                destaques: ['Design Coupé-SUV com quattro', 'Faróis Matrix LED', 'Teto panorâmico', 'MMI touch response']
+            },
+            'Audi Q7': {
+                potencia: '340 cv', torque: '500 Nm', zero100: '5,9 s', velMax: '250 km/h',
+                motor: '3.0 TFSI V6', transmissao: 'Tiptronic 8 marchas', tracao: 'Quattro (4×4)',
+                preco: 'R$ 649.990',
+                versoes: ['Q7 55 TFSI quattro tiptronic'],
+                destaques: ['7 lugares', 'Suspensão pneumática adaptativa', 'Faróis Matrix LED HD', 'Sistema de som Bang & Olufsen']
+            },
+            'Audi Q8': {
+                potencia: '340 cv', torque: '500 Nm', zero100: '5,9 s', velMax: '250 km/h',
+                motor: '3.0 TFSI V6', transmissao: 'Tiptronic 8 marchas', tracao: 'Quattro (4×4)',
+                preco: 'R$ 749.990',
+                versoes: ['Q8 55 TFSI quattro tiptronic'],
+                destaques: ['Design flagship SUV', 'MMI touch response dual', 'Head-up display', 'Bancos massageadores', 'Rodas aro 21"']
+            },
+            'Audi RS3': {
+                potencia: '400 cv', torque: '500 Nm', zero100: '3,8 s', velMax: '290 km/h',
+                motor: '2.5 TFSI 5 cilindros', transmissao: 'S tronic 7 marchas', tracao: 'Quattro (4×4)',
+                preco: 'R$ 549.990',
+                versoes: ['RS3 Sedan'],
+                destaques: ['Motor 5 cilindros único', 'RS Torque Splitter', 'Modo Drift', 'Freios cerâmicos opcionais', 'Rodas aro 19"']
+            },
+            'Audi RS Q8': {
+                potencia: '600 cv', torque: '800 Nm', zero100: '3,8 s', velMax: '305 km/h',
+                motor: '4.0 TFSI V8 biturbo', transmissao: 'Tiptronic 8 marchas', tracao: 'Quattro (4×4)',
+                preco: 'R$ 1.249.990',
+                versoes: ['RS Q8', 'RS Q8 Performance'],
+                destaques: ['SUV mais rápido de Nürburgring', 'Suspensão ativa PDCC Sport', 'Sistema de som Bang & Olufsen 3D', 'Rodas aro 23"']
+            }
+        };
+
+        function showModelDetail(model, imgSrc) {
+            var spec = modelSpecs[model];
+            if (!spec) return;
+            var detail = document.getElementById('modelDetail');
+            document.getElementById('detailName').textContent = model;
+            var di = document.getElementById('detailImg');
+            di.src = imgSrc || '';
+            di.alt = model;
+            document.getElementById('detailPower').textContent = spec.potencia;
+            document.getElementById('detailZero').textContent = spec.zero100;
+            document.getElementById('detailTracao').textContent = spec.tracao;
+            document.getElementById('detailPreco').textContent = spec.preco;
+
+            var accordion = document.getElementById('detailAccordion');
+            accordion.innerHTML = '';
+            var sections = [
+                { title: 'Motor / Motorização', cols: 3, items: [
+                    { label: 'Motor', value: spec.motor },
+                    { label: 'Potência', value: spec.potencia },
+                    { label: 'Torque', value: spec.torque }
+                ]},
+                { title: 'Performance', cols: 2, items: [
+                    { label: '0–100 km/h', value: spec.zero100 },
+                    { label: 'Velocidade máxima', value: spec.velMax }
+                ]},
+                { title: 'Drivetrain', cols: 2, items: [
+                    { label: 'Transmissão', value: spec.transmissao },
+                    { label: 'Tração', value: spec.tracao }
+                ]},
+                { title: 'Versões disponíveis', list: spec.versoes },
+                { title: 'Destaques do modelo', list: spec.destaques }
+            ];
+
+            sections.forEach(function(sec, idx) {
+                var item = document.createElement('div');
+                item.className = 'accordion-item' + (idx === 0 ? ' open' : '');
+                var header = document.createElement('div');
+                header.className = 'accordion-header';
+                header.innerHTML = '<span class="accordion-title">' + sec.title + '</span>'
+                    + '<span class="accordion-right"><span style="letter-spacing:1px">Expandir</span> <span class="accordion-arrow">▾</span></span>';
+                var body = document.createElement('div');
+                body.className = 'accordion-body';
+                if (sec.cols) body.style.gridTemplateColumns = 'repeat(' + sec.cols + ', 1fr)';
+                if (sec.list) {
+                    body.style.gridTemplateColumns = '1fr';
+                    sec.list.forEach(function(v) {
+                        var d = document.createElement('div');
+                        d.className = 'spec-list-item';
+                        d.textContent = '— ' + v;
+                        body.appendChild(d);
+                    });
+                } else {
+                    sec.items.forEach(function(i) {
+                        var row = document.createElement('div');
+                        row.className = 'spec-row';
+                        row.innerHTML = '<span class="spec-label">' + i.label + '</span><span class="spec-value">' + i.value + '</span>';
+                        body.appendChild(row);
+                    });
+                }
+                header.addEventListener('click', function() { item.classList.toggle('open'); });
+                item.appendChild(header);
+                item.appendChild(body);
+                accordion.appendChild(item);
+            });
+
+            detail.classList.add('visible');
+            setTimeout(function() {
+                detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 80);
+        }
+        window.showModelDetail = showModelDetail;
+
+        // ===== MODELS FILTER & SELECT =====
+        function selectModel(model) {
+            document.querySelectorAll('.model-card').forEach(function(c) { c.classList.remove('selected'); });
+            var clicked = document.querySelector('.model-card[data-model="' + model + '"]');
+            if (clicked) clicked.classList.add('selected');
+            var sel = document.getElementById('f_modelo');
+            for (var i = 0; i < sel.options.length; i++) {
+                if (sel.options[i].value === model) { sel.selectedIndex = i; break; }
+            }
+            showModelDetail(model, _imgMap[model] || '');
+        }
+        window.selectModel = selectModel;
+
+        document.querySelectorAll('.filter-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+                this.classList.add('active');
+                var filter = this.dataset.filter;
+                document.querySelectorAll('.model-card').forEach(function(card) {
+                    var cats = card.dataset.cat || '';
+                    if (filter === 'todos' || cats.indexOf(filter) !== -1) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
         maskCPF(document.getElementById('f_cpf'));
         maskCEP(document.getElementById('f_cep'));
 
@@ -736,35 +1297,6 @@
         document.getElementById('audiForm').addEventListener('submit', function(e) {
             e.preventDefault();
             if (_formSent) return;
-
-            var fields = [
-                { id: 'f_nome', label: 'Nome' },
-                { id: 'f_sobrenome', label: 'Sobrenome' },
-                { id: 'f_genero', label: 'Gênero' },
-                { id: 'f_telefone', label: 'Telefone' },
-                { id: 'f_email', label: 'E-mail' },
-                { id: 'f_cpf', label: 'CPF' },
-                { id: 'f_cep', label: 'CEP' },
-                { id: 'f_pretensao', label: 'Pretensão' }
-            ];
-
-            var ok = true, firstErr = null;
-            fields.forEach(function(f) {
-                var el = document.getElementById(f.id);
-                var val = el.value ? el.value.trim() : '';
-                el.classList.remove('error');
-                if (!val) {
-                    ok = false;
-                    el.classList.add('error');
-                    if (!firstErr) firstErr = el;
-                }
-            });
-
-            if (!ok) {
-                showStatus('Preencha todos os campos obrigatórios.', 'var(--red)');
-                if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                return;
-            }
 
             // Collect
             var nome = document.getElementById('f_nome').value.trim();
