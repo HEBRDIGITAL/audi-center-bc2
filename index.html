@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -1351,6 +1350,15 @@
         document.getElementById('audiForm').addEventListener('submit', function(e) {
             e.preventDefault();
             if (_formSent) return;
+
+            // Validação mínima: nome, email e telefone
+            var nome = document.getElementById('f_nome').value.trim();
+            var emailVal = document.getElementById('f_email').value.trim();
+            var telVal = document.getElementById('f_telefone').value.trim();
+            if (!nome) { showStatus('Por favor, informe seu nome.', '#ff4444'); return; }
+            if (!emailVal) { showStatus('Por favor, informe seu e-mail.', '#ff4444'); return; }
+            if (!telVal) { showStatus('Por favor, informe seu telefone.', '#ff4444'); return; }
+
             _formSent = true; // trava imediatamente — impede qualquer disparo duplo
 
             // Collect
