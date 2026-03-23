@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -277,8 +278,39 @@
         .model-card.selected .model-select-btn {
             background: var(--red);
         }
+        /* === COLLAPSED GRID STATE === */
+        .models-collapsed .models-filters { display: none; }
+        .models-collapsed .model-card:not(.selected) { display: none; }
+        .models-collapsed .models-grid {
+            grid-template-columns: minmax(220px, 340px);
+            justify-content: center;
+        }
+        .models-collapsed .model-card.selected {
+            border-color: var(--red);
+        }
+        /* Toggle button */
+        .models-toggle-btn {
+            display: block;
+            margin: 20px auto 0;
+            background: transparent;
+            border: 1px solid var(--gray-border);
+            color: var(--gray-light);
+            font-family: 'Barlow', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 8px 22px;
+            border-radius: 99px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .models-toggle-btn:hover {
+            border-color: rgba(255,255,255,0.4);
+            color: var(--white);
+        }
         @media (max-width: 600px) {
             .models-grid { grid-template-columns: repeat(2, 1fr); }
+            .models-collapsed .models-grid { grid-template-columns: minmax(200px, 300px); }
         }
 
         /* ===== MODEL DETAIL ===== */
@@ -718,7 +750,7 @@
     
     <!-- MODELOS -->
     <section class="models-section">
-        <div class="models-wrapper">
+        <div class="models-wrapper models-collapsed" id="modelsWrapper">
             <div class="models-filters">
                 <button class="filter-btn active" data-filter="todos">Todos</button>
                 <button class="filter-btn" data-filter="sport">Sport</button>
@@ -827,6 +859,9 @@
                     </div>
                 </div>
             </div>
+            <button class="models-toggle-btn" id="modelsToggleBtn" onclick="toggleModelsGrid()">
+                ↓ Escolher outro modelo
+            </button>
         </div>
 
             <!-- FICHA TÉCNICA -->
@@ -1250,6 +1285,21 @@
         }
         window.showModelDetail = showModelDetail;
 
+        // ===== MODELS COLLAPSE/EXPAND =====
+        function toggleModelsGrid() {
+            var wrapper = document.getElementById('modelsWrapper');
+            var btn = document.getElementById('modelsToggleBtn');
+            var isCollapsed = wrapper.classList.contains('models-collapsed');
+            if (isCollapsed) {
+                wrapper.classList.remove('models-collapsed');
+                btn.textContent = '↑ Fechar';
+            } else {
+                wrapper.classList.add('models-collapsed');
+                btn.textContent = '↓ Escolher outro modelo';
+            }
+        }
+        window.toggleModelsGrid = toggleModelsGrid;
+
         // ===== MODELS FILTER & SELECT =====
         function selectModel(model) {
             document.querySelectorAll('.model-card').forEach(function(c) { c.classList.remove('selected'); });
@@ -1259,6 +1309,10 @@
             for (var i = 0; i < sel.options.length; i++) {
                 if (sel.options[i].value === model) { sel.selectedIndex = i; break; }
             }
+            // Colapsa a grade e atualiza o botão após selecionar
+            var wrapper = document.getElementById('modelsWrapper');
+            wrapper.classList.add('models-collapsed');
+            document.getElementById('modelsToggleBtn').textContent = '↓ Escolher outro modelo';
             showModelDetail(model, _imgMap[model] || '');
         }
         window.selectModel = selectModel;
@@ -1297,6 +1351,7 @@
         document.getElementById('audiForm').addEventListener('submit', function(e) {
             e.preventDefault();
             if (_formSent) return;
+            _formSent = true; // trava imediatamente — impede qualquer disparo duplo
 
             // Collect
             var nome = document.getElementById('f_nome').value.trim();
@@ -1368,12 +1423,13 @@
             var waURL = 'https://api.whatsapp.com/send?phone=' + WA_PHONE + '&text=' + encodeURIComponent(msg);
 
             // Send to Sheets (fire and forget)
-            _formSent = true;
             try { fetch(SHEET_URL + '?' + qs, { method: 'GET', mode: 'no-cors', keepalive: true }); } catch(e) {}
 
             // ===== CONVERSION TRACKING =====
+            // eventID único para deduplicação Meta (browser pixel + CAPI não contam dobrado)
+            var _evtID = 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
             // Meta Pixel — Lead event
-            try { fbq('track', 'Lead', { content_name: modelo, content_category: 'Audi' }); } catch(e) {}
+            try { fbq('track', 'Lead', { content_name: modelo, content_category: 'Audi' }, { eventID: _evtID }); } catch(e) {}
             // Google Ads — Conversion event (adicione o CONVERSION_LABEL quando criar a conversão no Google Ads)
             try { gtag('event', 'conversion', { 'send_to': 'AW-10829753627/CONVERSION_LABEL' }); } catch(e) {}
             // ===== END CONVERSION TRACKING =====
