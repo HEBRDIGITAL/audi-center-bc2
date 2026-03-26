@@ -1433,15 +1433,6 @@
             // Send to Sheets (fire and forget)
             try { fetch(SHEET_URL + '?' + qs, { method: 'GET', mode: 'no-cors', keepalive: true }); } catch(e) {}
 
-            // ===== CONVERSION TRACKING =====
-            // eventID único para deduplicação Meta (browser pixel + CAPI não contam dobrado)
-            var _evtID = 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-            // Meta Pixel — Lead event
-            try { fbq('track', 'Lead', { content_name: modelo, content_category: 'Audi' }, { eventID: _evtID }); } catch(e) {}
-            // Google Ads — Conversion event (adicione o CONVERSION_LABEL quando criar a conversão no Google Ads)
-            try { gtag('event', 'conversion', { 'send_to': 'AW-10829753627/CONVERSION_LABEL' }); } catch(e) {}
-            // ===== END CONVERSION TRACKING =====
-
             // Redirect to WhatsApp after 1s
             setTimeout(function() {
                 window.location.href = waURL;
