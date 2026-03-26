@@ -9,33 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Meta Pixel Code (ID: 1558343924372915) -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1558343924372915');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1558343924372915&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
-
-    <!-- Google Ads gtag (ID: AW-10829753627) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10829753627"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-10829753627');
-    </script>
-    <!-- End Google Ads gtag -->
 
     <style>
         :root {
@@ -1446,14 +1419,6 @@
             // Send to Sheets (fire and forget)
             try { fetch(SHEET_URL + '?' + qs, { method: 'GET', mode: 'no-cors', keepalive: true }); } catch(e) {}
 
-            // ===== CONVERSION TRACKING =====
-            // Só dispara quando nome, e-mail e telefone estão preenchidos
-            if (nome && email && telVal) {
-                var _evtID = 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                try { fbq('track', 'Lead', { content_name: modelo, content_category: 'Audi' }, { eventID: _evtID }); } catch(e) {}
-                try { gtag('event', 'conversion', { 'send_to': 'AW-10829753627/CONVERSION_LABEL' }); } catch(e) {}
-            }
-            // ===== END CONVERSION TRACKING =====
 
             // Redirect to WhatsApp after 1s
             setTimeout(function() {
