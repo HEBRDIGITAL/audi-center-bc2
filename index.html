@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -1353,22 +1354,20 @@
 
             // Validação mínima: nome, email e telefone
             var nome = document.getElementById('f_nome').value.trim();
-            var emailVal = document.getElementById('f_email').value.trim();
+            var email = document.getElementById('f_email').value.trim();
             var telVal = document.getElementById('f_telefone').value.trim();
             if (!nome) { showStatus('Por favor, informe seu nome.', '#ff4444'); return; }
-            if (!emailVal) { showStatus('Por favor, informe seu e-mail.', '#ff4444'); return; }
+            if (!email) { showStatus('Por favor, informe seu e-mail.', '#ff4444'); return; }
             if (!telVal) { showStatus('Por favor, informe seu telefone.', '#ff4444'); return; }
 
             _formSent = true; // trava imediatamente — impede qualquer disparo duplo
 
             // Collect
-            var nome = document.getElementById('f_nome').value.trim();
             var sobrenome = document.getElementById('f_sobrenome').value.trim();
             var generoEl = document.getElementById('f_genero');
             var genero = generoEl.options[generoEl.selectedIndex].text;
             var ddi = document.getElementById('f_ddi').value;
             var telefone = ddi + ' ' + document.getElementById('f_telefone').value.trim();
-            var email = document.getElementById('f_email').value.trim();
             var cpf = document.getElementById('f_cpf').value.trim();
             var cep = document.getElementById('f_cep').value.trim();
             var pretensaoEl = document.getElementById('f_pretensao');
@@ -1432,6 +1431,15 @@
 
             // Send to Sheets (fire and forget)
             try { fetch(SHEET_URL + '?' + qs, { method: 'GET', mode: 'no-cors', keepalive: true }); } catch(e) {}
+
+            // ===== CONVERSION TRACKING =====
+            // Só dispara quando nome, e-mail e telefone estão preenchidos
+            if (nome && email && telVal) {
+                var _evtID = 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                try { fbq('track', 'Lead', { content_name: modelo, content_category: 'Audi' }, { eventID: _evtID }); } catch(e) {}
+                try { gtag('event', 'conversion', { 'send_to': 'AW-10829753627/CONVERSION_LABEL' }); } catch(e) {}
+            }
+            // ===== END CONVERSION TRACKING =====
 
             // Redirect to WhatsApp after 1s
             setTimeout(function() {
