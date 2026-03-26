@@ -1025,7 +1025,7 @@
 
                 <div class="status" id="status"></div>
 
-                <button type="submit" class="submit-btn" id="btnEnviar">Enviar</button>
+                <button type="submit" class="submit-btn" id="btnEnviar" disabled>Enviar</button>
             </form>
         </div>
     </section>
@@ -1340,6 +1340,20 @@
             el.addEventListener('focus', function() { this.closest('.field').classList.add('focused'); });
             el.addEventListener('blur', function() { this.closest('.field').classList.remove('focused'); });
         });
+
+        // ===== HABILITA BOTÃO =====
+        (function() {
+            var btnEnviar = document.getElementById('btnEnviar');
+            function checkFields() {
+                var nome = document.getElementById('f_nome').value.trim();
+                var email = document.getElementById('f_email').value.trim();
+                var tel = document.getElementById('f_telefone').value.trim();
+                btnEnviar.disabled = !(nome && email && tel);
+            }
+            ['f_nome', 'f_email', 'f_telefone'].forEach(function(id) {
+                document.getElementById(id).addEventListener('input', checkFields);
+            });
+        })();
 
         // ===== UTMs =====
         function getParam(k) {
