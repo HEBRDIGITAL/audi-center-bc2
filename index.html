@@ -391,278 +391,308 @@
         }
 
         /* ===== FORM SECTION ===== */
+        /* ===== FORM SECTION — light theme ===== */
         .form-section {
-            background: var(--dark);
-            padding: 64px 24px 80px;
+            background: #f5f5f5;
+            padding: 72px 24px 96px;
             position: relative;
         }
-
         .form-wrapper {
-            max-width: 560px;
+            max-width: 520px;
             margin: 0 auto;
         }
 
+        /* Step indicator */
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 48px;
+            gap: 0;
+        }
+        .step-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #d5d5d5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #b0b0b0;
+            transition: all 0.4s;
+            flex-shrink: 0;
+            background: #fff;
+        }
+        .step-dot.active {
+            border-color: var(--red);
+            color: #fff;
+            background: var(--red);
+        }
+        .step-dot.done {
+            border-color: #b0b0b0;
+            color: #b0b0b0;
+            background: #fff;
+        }
+        .step-line {
+            width: 56px;
+            height: 2px;
+            background: #d5d5d5;
+        }
+
+        /* Form heading */
         .form-heading {
-            text-align: center;
-            font-size: 22px;
-            font-weight: 400;
-            line-height: 1.5;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 56px;
-            letter-spacing: -0.2px;
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.15;
+            color: #0a0a0a;
+            margin-bottom: 40px;
+            letter-spacing: -0.8px;
         }
+        .form-heading strong { font-weight: 800; color: #0a0a0a; }
 
-        .form-heading strong {
-            color: var(--white);
-            font-weight: 600;
+        /* Progress bar + fields layout */
+        .form-layout {
+            display: flex;
+            gap: 28px;
+            align-items: flex-start;
         }
-
-        /* Form fields */
-        .field {
-            margin-bottom: 28px;
+        .form-progress {
+            flex-shrink: 0;
+            width: 10px;
             position: relative;
+            align-self: stretch;
         }
+        .form-progress-track {
+            position: absolute;
+            top: 8px; bottom: 8px;
+            left: 50%; transform: translateX(-50%);
+            width: 3px;
+            background: #d9d9d9;
+            border-radius: 99px;
+        }
+        .form-progress-fill {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 0%;
+            background: var(--red);
+            border-radius: 99px;
+            transition: height 0.4s ease;
+        }
+        .form-fields { flex: 1; min-width: 0; }
 
+        /* Fields */
+        .field {
+            margin-bottom: 24px;
+            position: relative;
+            transition: opacity 0.4s;
+        }
+        .field-locked {
+            opacity: 0.35;
+            pointer-events: none;
+        }
+        .field-locked.unlocked {
+            opacity: 1;
+            pointer-events: auto;
+        }
         .field-label {
             display: block;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.5);
-            margin-bottom: 10px;
-            transition: color 0.3s;
+            font-size: 16px;
+            font-weight: 500;
+            color: #0a0a0a;
+            margin-bottom: 8px;
+            letter-spacing: 0;
+            text-transform: none;
         }
-
-        .field.focused .field-label {
-            color: var(--white);
-        }
-
         .field-input {
             width: 100%;
-            padding: 16px 0;
-            font-size: 17px;
+            padding: 14px 16px;
+            font-size: 15px;
             font-family: 'Barlow', sans-serif;
             font-weight: 400;
-            color: var(--white);
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid var(--gray-border);
+            color: #0a0a0a;
+            background: #ebebeb;
+            border: 1.5px solid transparent;
+            border-radius: 8px;
             outline: none;
-            transition: border-color 0.3s;
-            border-radius: 0;
+            transition: border-color 0.2s, background 0.2s;
             -webkit-appearance: none;
+            box-sizing: border-box;
         }
-
         .field-input:focus {
-            border-bottom-color: var(--white);
+            border-color: #333;
+            background: #fff;
         }
+        .field-input::placeholder { color: #aaa; }
+        .field-input:disabled { background: #ebebeb; }
 
-        .field-input::placeholder {
-            color: rgba(255,255,255,0.2);
-            font-weight: 300;
+        /* Phone with fixed +55 prefix */
+        .phone-wrap {
+            display: flex;
+            align-items: center;
+            background: #ebebeb;
+            border: 1.5px solid transparent;
+            border-radius: 8px;
+            transition: border-color 0.2s, background 0.2s;
+            overflow: hidden;
         }
-
-        .field-input.error {
-            border-bottom-color: var(--red);
+        .phone-wrap:focus-within {
+            border-color: #333;
+            background: #fff;
         }
-
-        /* Select styling */
-        .field-select {
-            width: 100%;
-            padding: 16px 0;
-            font-size: 17px;
+        .phone-ddi-select {
+            padding: 14px 28px 14px 16px;
+            font-size: 15px;
             font-family: 'Barlow', sans-serif;
-            font-weight: 400;
-            color: var(--white);
+            font-weight: 500;
+            color: #555;
             background: transparent;
             border: none;
-            border-bottom: 1px solid var(--gray-border);
             outline: none;
             appearance: none;
             -webkit-appearance: none;
             cursor: pointer;
-            transition: border-color 0.3s;
-            border-radius: 0;
-        }
-
-        .field-select:focus {
-            border-bottom-color: var(--white);
-        }
-
-        .field-select option {
-            background: var(--dark-bg);
-            color: var(--white);
-        }
-
-        .select-arrow {
-            position: absolute;
-            right: 0;
-            bottom: 20px;
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 6px solid rgba(255,255,255,0.4);
-            pointer-events: none;
-            transition: border-top-color 0.3s;
-        }
-
-        .field.focused .select-arrow {
-            border-top-color: var(--white);
-        }
-
-        /* Phone field with DDI selector */
-        .phone-row {
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid var(--gray-border);
-            transition: border-color 0.3s;
-        }
-        .field.focused .phone-row {
-            border-bottom-color: var(--white);
-        }
-        .phone-row:has(.phone-input.error) {
-            border-bottom-color: var(--red);
+            flex-shrink: 0;
+            white-space: nowrap;
         }
         .phone-ddi-wrap {
             position: relative;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
         }
-        .phone-ddi-select {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: var(--white);
-            font-size: 16px;
-            font-family: 'Barlow', sans-serif;
-            font-weight: 400;
-            appearance: none;
-            -webkit-appearance: none;
-            cursor: pointer;
-            padding: 16px 26px 16px 0;
-        }
-        .phone-ddi-select option {
-            background: #1a1a1a;
-            color: var(--white);
-        }
-        .phone-ddi-arrow {
+        .phone-ddi-wrap::after {
+            content: '';
             position: absolute;
-            right: 8px;
+            right: 10px;
             top: 50%;
             transform: translateY(-50%);
             width: 0;
             height: 0;
             border-left: 4px solid transparent;
             border-right: 4px solid transparent;
-            border-top: 5px solid rgba(255,255,255,0.4);
+            border-top: 5px solid #999;
             pointer-events: none;
-            transition: border-top-color 0.3s;
         }
-        .field.focused .phone-ddi-arrow {
-            border-top-color: var(--white);
-        }
-        .phone-ddi-sep {
+        .phone-sep {
             width: 1px;
-            height: 18px;
-            background: var(--gray-border);
+            height: 20px;
+            background: #ccc;
+            margin: 0 10px;
             flex-shrink: 0;
-            margin: 0 12px;
-            transition: background 0.3s;
-        }
-        .field.focused .phone-ddi-sep {
-            background: rgba(255,255,255,0.25);
         }
         .phone-input {
             flex: 1;
-            border-bottom: none !important;
-            padding-left: 0 !important;
+            padding: 14px 16px 14px 0;
+            font-size: 15px;
+            font-family: 'Barlow', sans-serif;
+            font-weight: 400;
+            color: #0a0a0a;
+            background: transparent;
+            border: none;
+            outline: none;
         }
-
-        /* Two columns */
-        .field-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-
-        @media (max-width: 480px) {
-            .field-row { grid-template-columns: 1fr; gap: 0; }
-        }
-
-        /* Fixed field */
-        .field-fixed {
-            padding: 16px 0;
-            font-size: 17px;
-            color: rgba(255,255,255,0.35);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            font-weight: 300;
-        }
+        .phone-input::placeholder { color: #aaa; }
 
         /* Privacy */
         .privacy {
-            text-align: center;
             font-size: 12px;
-            color: rgba(255,255,255,0.3);
+            color: #888;
             line-height: 1.7;
-            margin: 40px 0;
+            margin: 28px 0 24px;
+            text-align: center;
         }
 
         /* Status */
         .status {
             text-align: center;
             font-size: 14px;
-            min-height: 24px;
-            margin-bottom: 16px;
-            transition: opacity 0.3s;
+            min-height: 20px;
+            margin-bottom: 12px;
         }
 
-        /* Submit button */
+        /* Buttons */
         .submit-btn {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             width: 100%;
-            padding: 22px;
-            font-size: 15px;
-            font-weight: 700;
+            padding: 18px 28px;
+            font-size: 16px;
+            font-weight: 600;
             font-family: 'Barlow', sans-serif;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--white);
-            background: var(--red);
+            letter-spacing: 0.2px;
+            color: #fff;
+            background: #6b6f78;
             border: none;
+            border-radius: 99px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: background 0.25s, transform 0.15s;
         }
+        .submit-btn:hover { background: #585c64; }
+        .submit-btn:active { transform: scale(0.98); }
+        .submit-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-        .submit-btn:hover {
+        /* ===== QUALIFICATION QUESTIONS — Step 2 (dark, neutro) ===== */
+        .form-section.step2-active {
+            background: var(--dark);
+        }
+        .q-block {
+            margin-bottom: 36px;
+            animation: fadeUp 0.32s ease forwards;
+        }
+        .q-hidden { display: none; }
+        .q-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 12px;
+            display: block;
+        }
+        .q-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .q-option {
+            padding: 16px 20px;
+            border-radius: 10px;
+            border: 1.5px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.04);
+            cursor: pointer;
+            font-family: 'Barlow', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.75);
+            text-align: left;
+            transition: all 0.18s;
+        }
+        .q-option:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.25);
+            color: #fff;
+        }
+        .q-option.selected {
+            border-color: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-weight: 500;
+        }
+        /* Step 2 heading */
+        #formStep2 .form-heading {
+            color: #fff;
+        }
+        #formStep2 .form-heading strong { color: #fff; }
+        #formStep2 .submit-btn {
+            background: var(--red);
+        }
+        #formStep2 .submit-btn:hover {
             background: var(--red-hover);
-            letter-spacing: 4px;
-        }
-
-        .submit-btn:active {
-            transform: scale(0.98);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.5;
-            cursor: wait;
-        }
-
-        .submit-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-            transition: left 0.5s;
-        }
-
-        .submit-btn:hover::after {
-            left: 100%;
         }
 
         /* ===== FOOTER ===== */
@@ -698,19 +728,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Smooth reveal for form fields */
-        .field { opacity: 0; animation: fadeUp 0.5s ease-out forwards; }
-        .field:nth-child(1) { animation-delay: 0.05s; }
-        .field:nth-child(2) { animation-delay: 0.1s; }
-        .field:nth-child(3) { animation-delay: 0.15s; }
-        .field:nth-child(4) { animation-delay: 0.2s; }
-        .field:nth-child(5) { animation-delay: 0.25s; }
-        .field:nth-child(6) { animation-delay: 0.3s; }
-        .field:nth-child(7) { animation-delay: 0.35s; }
-        .field:nth-child(8) { animation-delay: 0.4s; }
-        .field:nth-child(9) { animation-delay: 0.45s; }
-        .field:nth-child(10) { animation-delay: 0.5s; }
-        .field:nth-child(11) { animation-delay: 0.55s; }
+        /* Step 1 fields fade in on load */
+        #formStep1 .field { opacity: 0; animation: fadeUp 0.45s ease-out forwards; }
+        #formStep1 .field:nth-child(1) { animation-delay: 0.05s; }
+        #formStep1 .field:nth-child(2) { animation-delay: 0.12s; }
+        #formStep1 .field:nth-child(3) { animation-delay: 0.19s; }
+        /* Campos travados: sem animação, opacidade fixa */
+        #formStep1 .field-locked { animation: none; opacity: 0.35; }
+        #formStep1 .field-locked.unlocked { opacity: 1; }
     </style>
 <!-- Vercel Web Analytics -->
     <script>
@@ -887,130 +912,117 @@
     <!-- FORM -->
     <section class="form-section">
         <div class="form-wrapper">
-            <p class="form-heading">Preencha os campos abaixo e <strong>fale direto<br>com a Audi Center Balneário Camboriú</strong></p>
 
-            <form id="audiForm" novalidate>
-                <div class="field">
-                    <label class="field-label">Nome</label>
-                    <input type="text" id="f_nome" class="field-input" autocomplete="given-name">
-                </div>
+            <!-- Indicador de etapas -->
+            <div class="step-indicator">
+                <div class="step-dot active" id="dotStep1"><span>1</span></div>
+                <div class="step-line"></div>
+                <div class="step-dot" id="dotStep2"><span>2</span></div>
+            </div>
 
-                <div class="field">
-                    <label class="field-label">Sobrenome</label>
-                    <input type="text" id="f_sobrenome" class="field-input" autocomplete="family-name">
-                </div>
+            <!-- ===== STEP 1 ===== -->
+            <div id="formStep1">
+                <p class="form-heading">Entre em<br><strong>contato</strong></p>
 
-                <div class="field">
-                    <label class="field-label">Gênero</label>
-                    <select id="f_genero" class="field-select">
-                        <option value="" disabled selected>Selecione</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Feminino">Feminino</option>
-                        <option value="Outro">Outro</option>
-                        <option value="Prefiro não dizer">Prefiro não dizer</option>
-                    </select>
-                    <span class="select-arrow"></span>
-                </div>
-
-                <div class="field">
-                    <label class="field-label">Telefone</label>
-                    <div class="phone-row">
-                        <div class="phone-ddi-wrap">
-                            <select id="f_ddi" class="phone-ddi-select">
-                                <option value="+55">🇧🇷 +55</option>
-                                <option value="+54">🇦🇷 +54</option>
-                                <option value="+591">🇧🇴 +591</option>
-                                <option value="+56">🇨🇱 +56</option>
-                                <option value="+57">🇨🇴 +57</option>
-                                <option value="+506">🇨🇷 +506</option>
-                                <option value="+593">🇪🇨 +593</option>
-                                <option value="+503">🇸🇻 +503</option>
-                                <option value="+502">🇬🇹 +502</option>
-                                <option value="+504">🇭🇳 +504</option>
-                                <option value="+52">🇲🇽 +52</option>
-                                <option value="+505">🇳🇮 +505</option>
-                                <option value="+507">🇵🇦 +507</option>
-                                <option value="+595">🇵🇾 +595</option>
-                                <option value="+51">🇵🇪 +51</option>
-                                <option value="+1787">🇵🇷 +1787</option>
-                                <option value="+598">🇺🇾 +598</option>
-                                <option value="+58">🇻🇪 +58</option>
-                                <option value="+1">🇺🇸 +1</option>
-                                <option value="+44">🇬🇧 +44</option>
-                                <option value="+351">🇵🇹 +351</option>
-                                <option value="+34">🇪🇸 +34</option>
-                                <option value="+39">🇮🇹 +39</option>
-                                <option value="+33">🇫🇷 +33</option>
-                                <option value="+49">🇩🇪 +49</option>
-                                <option value="+81">🇯🇵 +81</option>
-                                <option value="+86">🇨🇳 +86</option>
-                                <option value="+971">🇦🇪 +971</option>
-                            </select>
-                            <span class="phone-ddi-arrow"></span>
+                <div class="form-layout">
+                    <!-- Barra de progresso vertical -->
+                    <div class="form-progress">
+                        <div class="form-progress-track">
+                            <div class="form-progress-fill" id="progressFill"></div>
                         </div>
-                        <span class="phone-ddi-sep"></span>
-                        <input type="tel" id="f_telefone" class="field-input phone-input" placeholder="(00) 00000-0000" autocomplete="tel">
                     </div>
-                </div>
 
-                <div class="field">
-                    <label class="field-label">E-mail</label>
-                    <input type="email" id="f_email" class="field-input" autocomplete="email">
-                </div>
+                    <!-- Campos -->
+                    <div class="form-fields">
+                        <div class="field">
+                            <label class="field-label">Nome completo</label>
+                            <input type="text" id="f_nome" class="field-input" placeholder="Seu nome" autocomplete="given-name">
+                        </div>
 
-                <div class="field-row">
-                    <div class="field">
-                        <label class="field-label">CPF</label>
-                        <input type="text" id="f_cpf" class="field-input" placeholder="000.000.000-00">
+                        <div class="field field-locked" id="field-email">
+                            <label class="field-label">E-mail</label>
+                            <input type="email" id="f_email" class="field-input" placeholder="seu@email.com" disabled autocomplete="email">
+                        </div>
+
+                        <div class="field field-locked" id="field-telefone">
+                            <label class="field-label">Telefone</label>
+                            <div class="phone-wrap">
+                                <div class="phone-ddi-wrap">
+                                    <select id="f_ddi" class="phone-ddi-select">
+                                        <option value="55">🇧🇷 +55</option>
+                                        <option value="54">🇦🇷 +54</option>
+                                        <option value="591">🇧🇴 +591</option>
+                                        <option value="56">🇨🇱 +56</option>
+                                        <option value="57">🇨🇴 +57</option>
+                                        <option value="595">🇵🇾 +595</option>
+                                        <option value="598">🇺🇾 +598</option>
+                                        <option value="58">🇻🇪 +58</option>
+                                        <option value="51">🇵🇪 +51</option>
+                                        <option value="1">🇺🇸 +1</option>
+                                        <option value="44">🇬🇧 +44</option>
+                                        <option value="351">🇵🇹 +351</option>
+                                        <option value="34">🇪🇸 +34</option>
+                                        <option value="39">🇮🇹 +39</option>
+                                        <option value="49">🇩🇪 +49</option>
+                                    </select>
+                                </div>
+                                <span class="phone-sep"></span>
+                                <input type="tel" id="f_telefone" class="phone-input" placeholder="(11) 99999-9999" disabled autocomplete="tel">
+                            </div>
+                        </div>
                     </div>
-                    <div class="field">
-                        <label class="field-label">CEP</label>
-                        <input type="text" id="f_cep" class="field-input" placeholder="00000-000">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="field-label">Pretensão de compra</label>
-                    <select id="f_pretensao" class="field-select">
-                        <option value="" disabled selected>Selecione</option>
-                        <option value="Até 1 mês">Até 1 mês</option>
-                        <option value="Até 2 meses">Até 2 meses</option>
-                        <option value="Mais de 3 meses">Mais de 3 meses</option>
-                    </select>
-                    <span class="select-arrow"></span>
-                </div>
-
-                <div class="field">
-                    <label class="field-label">Modelo de interesse</label>
-                    <select id="f_modelo" class="field-select" required>
-                        <option value="Audi Q5 SUV" selected>Audi Q5 SUV</option>
-                        <option value="Audi Q5 Sportback">Audi Q5 Sportback</option>
-                        <option value="Audi Q3">Audi Q3</option>
-                        <option value="Audi Q3 Sportback">Audi Q3 Sportback</option>
-                        <option value="Audi A3 Sedan">Audi A3 Sedan</option>
-                        <option value="Audi A4 Sedan">Audi A4 Sedan</option>
-                        <option value="Audi A5 Sportback">Audi A5 Sportback</option>
-                        <option value="Audi Q7">Audi Q7</option>
-                        <option value="Audi Q8">Audi Q8</option>
-                        <option value="Audi RS3">Audi RS3</option>
-                        <option value="Audi RS Q8">Audi RS Q8</option>
-                    </select>
-                    <span class="select-arrow"></span>
-                </div>
-
-                <div class="field">
-                    <label class="field-label">Concessionária</label>
-                    <div class="field-fixed">Audi Center Balneário Camboriú</div>
                 </div>
 
                 <div class="privacy">
-                    Ao enviar, você concorda com o tratamento dos seus dados pessoais conforme previsto na Declaração de Privacidade da Audi Center Balneário Camboriú.
+                    Ao continuar, você concorda com o tratamento dos seus dados conforme a LGPD e a Declaração de Privacidade da Audi Center Balneário Camboriú.
                 </div>
 
-                <div class="status" id="status"></div>
+                <button class="submit-btn" id="btnStep1" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    Continuar para a próxima etapa
+                </button>
+            </div>
 
-                <button type="submit" class="submit-btn" id="btnEnviar" disabled>Enviar</button>
-            </form>
+            <!-- ===== STEP 2 ===== -->
+            <div id="formStep2" style="display:none">
+                <p class="form-heading">Só mais<br><strong>algumas perguntas</strong></p>
+
+                <!-- Q1: Carro para troca -->
+                <div class="q-block" id="qCarroTroca">
+                    <p class="q-label">Possui carro para troca?</p>
+                    <div class="q-options">
+                        <button class="q-option positive" onclick="selectQ('carroTroca', 'Sim, possuo carro para troca', this)">Sim, possuo carro para troca</button>
+                        <button class="q-option negative" onclick="selectQ('carroTroca', 'Não possuo carro para troca', this)">Não possuo carro para troca</button>
+                        <button class="q-option positive" onclick="selectQ('carroTroca', 'Não, mas tenho o valor da entrada', this)">Não, mas tenho o valor da entrada</button>
+                    </div>
+                </div>
+
+                <!-- Q2: Pretensão de compra -->
+                <div class="q-block q-hidden" id="qPretensao">
+                    <p class="q-label">Pretensão de compra</p>
+                    <div class="q-options">
+                        <button class="q-option positive" onclick="selectQ('pretensao', 'Até 1 mês', this)">Até 1 mês</button>
+                        <button class="q-option positive" onclick="selectQ('pretensao', 'Até 2 meses', this)">Até 2 meses</button>
+                        <button class="q-option negative" onclick="selectQ('pretensao', 'Mais de 3 meses', this)">Mais de 3 meses</button>
+                    </div>
+                </div>
+
+                <!-- Q3: Valor do carro (condicional — só se Q1 = "Sim") -->
+                <div class="q-block q-hidden" id="qValorCarro">
+                    <p class="q-label">Valor estimado do seu carro</p>
+                    <div class="q-options">
+                        <button class="q-option positive" onclick="selectQ('valorCarro', 'Acima de R$ 100k', this)">Acima de R$ 100k</button>
+                        <button class="q-option negative" onclick="selectQ('valorCarro', 'Abaixo de R$ 100k', this)">Abaixo de R$ 100k</button>
+                    </div>
+                </div>
+
+                <!-- Botão enviar (aparece ao final) -->
+                <div class="q-block q-hidden" id="qEnviar">
+                    <div class="status" id="status"></div>
+                    <button class="submit-btn" id="btnEnviar">Enviar →</button>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -1037,58 +1049,82 @@
         var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzea0ut7RPLD_NGmEcG8-zUD8r40iaqSVwnRvkRD6lwUrsOGU40aKAT9YC_LufQPuPE/exec';
         var WA_PHONE = '5547999021851';
 
-        // ===== MÁSCARAS =====
-        function setupPhoneMask() {
-            var ddiSel = document.getElementById('f_ddi');
-            var telInp = document.getElementById('f_telefone');
+        // ===== STEP 1: DESBLOQUEIO PROGRESSIVO =====
+        var nomeEl    = document.getElementById('f_nome');
+        var emailEl   = document.getElementById('f_email');
+        var telEl     = document.getElementById('f_telefone');
+        var btnStep1  = document.getElementById('btnStep1');
+        var fieldEmail = document.getElementById('field-email');
+        var fieldTel   = document.getElementById('field-telefone');
 
-            telInp.addEventListener('input', function(e) {
-                if (ddiSel.value !== '+55') return;
+        function isEmailValid(v) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        }
+        function getRawDigits(v) {
+            return v.replace(/\D/g, '');
+        }
+
+        function checkUnlock() {
+            var nomeOk  = nomeEl.value.trim().length > 0;
+            var emailOk = isEmailValid(emailEl.value.trim());
+            var telOk   = getRawDigits(telEl.value).length >= 10;
+
+            // Desbloqueia e-mail quando nome preenchido
+            if (nomeOk) {
+                fieldEmail.classList.add('unlocked');
+                emailEl.disabled = false;
+            } else {
+                fieldEmail.classList.remove('unlocked');
+                emailEl.disabled = true;
+            }
+
+            // Desbloqueia telefone quando e-mail válido
+            if (emailOk) {
+                fieldTel.classList.add('unlocked');
+                telEl.disabled = false;
+            } else {
+                fieldTel.classList.remove('unlocked');
+                telEl.disabled = true;
+            }
+
+            btnStep1.disabled = !(nomeOk && emailOk && telOk);
+
+            // Barra de progresso (0 → 33% → 66% → 100%)
+            var filled = (nomeOk ? 1 : 0) + (emailOk ? 1 : 0) + (telOk ? 1 : 0);
+            var pct = Math.round((filled / 3) * 100);
+            var fill = document.getElementById('progressFill');
+            if (fill) fill.style.height = pct + '%';
+        }
+
+        // Máscara de telefone (BR com DDD, outros sem máscara)
+        var ddiEl = document.getElementById('f_ddi');
+
+        telEl.addEventListener('input', function(e) {
+            if (ddiEl.value === '55') {
                 var v = e.target.value.replace(/\D/g, '');
                 if (v.length > 11) v = v.slice(0, 11);
-                if (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+                if (v.length > 6)      v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
                 else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
                 else if (v.length > 0) v = '(' + v;
                 e.target.value = v;
-            });
+            }
+            checkUnlock();
+        });
 
-            ddiSel.addEventListener('change', function() {
-                telInp.value = '';
-                telInp.placeholder = this.value === '+55' ? '(00) 00000-0000' : '000 000 0000';
-            });
+        ddiEl.addEventListener('change', function() {
+            telEl.value = '';
+            telEl.placeholder = this.value === '55' ? '(11) 99999-9999' : '000 000 0000';
+            checkUnlock();
+        });
 
-            // Focus/blur for label animation
-            [ddiSel, telInp].forEach(function(el) {
-                el.addEventListener('focus', function() {
-                    this.closest('.field').classList.add('focused');
-                });
-                el.addEventListener('blur', function() {
-                    this.closest('.field').classList.remove('focused');
-                });
-            });
-        }
+        nomeEl.addEventListener('input', checkUnlock);
+        emailEl.addEventListener('input', checkUnlock);
 
-        function maskCPF(el) {
-            el.addEventListener('input', function(e) {
-                var v = e.target.value.replace(/\D/g, '');
-                if (v.length > 11) v = v.slice(0, 11);
-                if (v.length > 9) v = v.slice(0,3)+'.'+v.slice(3,6)+'.'+v.slice(6,9)+'-'+v.slice(9);
-                else if (v.length > 6) v = v.slice(0,3)+'.'+v.slice(3,6)+'.'+v.slice(6);
-                else if (v.length > 3) v = v.slice(0,3)+'.'+v.slice(3);
-                e.target.value = v;
-            });
-        }
-
-        function maskCEP(el) {
-            el.addEventListener('input', function(e) {
-                var v = e.target.value.replace(/\D/g, '');
-                if (v.length > 8) v = v.slice(0, 8);
-                if (v.length > 5) v = v.slice(0,5)+'-'+v.slice(5);
-                e.target.value = v;
-            });
-        }
-
-        setupPhoneMask();
+        // Focus/blur label
+        [nomeEl, emailEl, telEl].forEach(function(el) {
+            el.addEventListener('focus', function() { this.closest('.field').classList.add('focused'); });
+            el.addEventListener('blur',  function() { this.closest('.field').classList.remove('focused'); });
+        });
 
         // ===== CAR IMAGES =====
         var _imgMap = {
@@ -1289,10 +1325,6 @@
             document.querySelectorAll('.model-card').forEach(function(c) { c.classList.remove('selected'); });
             var clicked = document.querySelector('.model-card[data-model="' + model + '"]');
             if (clicked) clicked.classList.add('selected');
-            var sel = document.getElementById('f_modelo');
-            for (var i = 0; i < sel.options.length; i++) {
-                if (sel.options[i].value === model) { sel.selectedIndex = i; break; }
-            }
             // Colapsa a grade e atualiza o botão após selecionar
             var wrapper = document.getElementById('modelsWrapper');
             wrapper.classList.add('models-collapsed');
@@ -1316,139 +1348,148 @@
                 });
             });
         });
-        maskCPF(document.getElementById('f_cpf'));
-        maskCEP(document.getElementById('f_cep'));
-
-        // ===== FOCUS LABELS =====
-        document.querySelectorAll('.field-input, .field-select').forEach(function(el) {
-            el.addEventListener('focus', function() { this.closest('.field').classList.add('focused'); });
-            el.addEventListener('blur', function() { this.closest('.field').classList.remove('focused'); });
-        });
-
-        // ===== HABILITA BOTÃO =====
-        (function() {
-            var btnEnviar = document.getElementById('btnEnviar');
-            function checkFields() {
-                var nome = document.getElementById('f_nome').value.trim();
-                var email = document.getElementById('f_email').value.trim();
-                var tel = document.getElementById('f_telefone').value.trim();
-                btnEnviar.disabled = !(nome && email && tel);
-            }
-            ['f_nome', 'f_email', 'f_telefone'].forEach(function(id) {
-                document.getElementById(id).addEventListener('input', checkFields);
-            });
-        })();
-
         // ===== UTMs =====
         function getParam(k) {
             try { return new URLSearchParams(window.location.search).get(k) || ''; } catch(e) { return ''; }
         }
 
-        // ===== SUBMIT =====
-        var _formSent = false;
-        document.getElementById('audiForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (_formSent) return;
+        // ===== HELPER: modelo selecionado =====
+        function getModelo() {
+            var sel = document.querySelector('.model-card.selected');
+            return sel ? (sel.dataset.model || 'Audi Q5 SUV') : 'Audi Q5 SUV';
+        }
 
-            // Validação mínima: nome, email e telefone
-            var nome = document.getElementById('f_nome').value.trim();
-            var email = document.getElementById('f_email').value.trim();
-            var telVal = document.getElementById('f_telefone').value.trim();
-            if (!nome) { showStatus('Por favor, informe seu nome.', '#ff4444'); return; }
-            if (!email) { showStatus('Por favor, informe seu e-mail.', '#ff4444'); return; }
-            if (!telVal) { showStatus('Por favor, informe seu telefone.', '#ff4444'); return; }
+        // ===== HELPER: enviar para Sheets =====
+        function sendToSheets(data) {
+            var qs = Object.keys(data).map(function(k) {
+                return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
+            }).join('&');
+            try { fetch(SHEET_URL + '?' + qs, { method: 'GET', mode: 'no-cors', keepalive: true }); } catch(e) {}
+        }
 
-            _formSent = true; // trava imediatamente — impede qualquer disparo duplo
+        // ===== STEP 1 → STEP 2 =====
+        btnStep1.addEventListener('click', function() {
+            var nome     = nomeEl.value.trim();
+            var email    = emailEl.value.trim();
+            var telefone = ddiEl.value + ' ' + telEl.value.trim(); // DDI sem "+" + número
+            var modelo   = getModelo();
 
-            // Collect
-            var sobrenome = document.getElementById('f_sobrenome').value.trim();
-            var generoEl = document.getElementById('f_genero');
-            var genero = generoEl.options[generoEl.selectedIndex].text;
-            var ddi = document.getElementById('f_ddi').value;
-            var telefone = ddi + ' ' + document.getElementById('f_telefone').value.trim();
-            var cpf = document.getElementById('f_cpf').value.trim();
-            var cep = document.getElementById('f_cep').value.trim();
-            var pretensaoEl = document.getElementById('f_pretensao');
-            var pretensao = pretensaoEl.options[pretensaoEl.selectedIndex].text;
-            var modeloEl = document.getElementById('f_modelo');
-            var modelo = modeloEl.options[modeloEl.selectedIndex].text;
-            var concessionaria = 'Audi Center Balneário Camboriú';
-
-            // Disable button
-            var btn = document.getElementById('btnEnviar');
-            btn.disabled = true;
-            btn.textContent = 'ENVIANDO...';
-            showStatus('Enviando seus dados...', 'rgba(255,255,255,0.6)');
-
-            // Sheet data
-            var sd = {
+            // Envia Step 1 para Sheets (fire-and-forget)
+            sendToSheets({
+                evento: 'step1_lead',
                 data: new Date().toLocaleString('pt-BR'),
                 nome: nome,
-                sobrenome: sobrenome,
-                genero: genero,
-                telefone: telefone,
                 email: email,
-                tipo_documento: 'CPF',
-                documento: cpf,
-                cep: cep,
-                pretensao: pretensao,
+                telefone: telefone,
                 modelo: modelo,
-                concessionaria: concessionaria,
-                utm_source: getParam('utm_source'),
-                utm_medium: getParam('utm_medium'),
+                utm_source:   getParam('utm_source'),
+                utm_medium:   getParam('utm_medium'),
                 utm_campaign: getParam('utm_campaign'),
-                utm_term: getParam('utm_term'),
-                utm_content: getParam('utm_content'),
-                gclid: getParam('gclid'),
-                gad_source: getParam('gad_source'),
-                gad_campaign: getParam('gad_campaign'),
-                fbclid: getParam('fbclid'),
-                page_url: window.location.href
-            };
+                utm_term:     getParam('utm_term'),
+                utm_content:  getParam('utm_content'),
+                gclid:        getParam('gclid'),
+                fbclid:       getParam('fbclid'),
+                page_url:     window.location.href
+            });
 
-            var qs = Object.keys(sd).map(function(k) {
-                return encodeURIComponent(k) + '=' + encodeURIComponent(sd[k]);
-            }).join('&');
+            // Transição para Step 2
+            document.getElementById('formStep1').style.display = 'none';
+            var s2 = document.getElementById('formStep2');
+            s2.style.display = 'block';
+            document.getElementById('dotStep1').classList.remove('active');
+            document.getElementById('dotStep1').classList.add('done');
+            document.getElementById('dotStep2').classList.add('active');
+            // Fundo escuro no Step 2
+            document.querySelector('.form-section').classList.add('step2-active');
+            document.querySelector('.step-dot.done').style.background = 'transparent';
+            document.querySelector('.step-dot.done').style.borderColor = 'rgba(255,255,255,0.25)';
+            document.querySelector('.step-dot.done').style.color = 'rgba(255,255,255,0.3)';
+            document.querySelector('.step-line').style.background = 'rgba(255,255,255,0.15)';
+            document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
 
-            // WhatsApp message
+        // ===== STEP 2: PERGUNTAS =====
+        var step2Data = { carroTroca: '', pretensao: '', valorCarro: '' };
+
+        window.selectQ = function(pergunta, valor, btn) {
+            // Marca selecionada
+            var block = btn.closest('.q-block');
+            block.querySelectorAll('.q-option').forEach(function(b) { b.classList.remove('selected'); });
+            btn.classList.add('selected');
+            step2Data[pergunta] = valor;
+
+            // Revela próxima etapa
+            var nextId = null;
+            if (pergunta === 'carroTroca') {
+                nextId = 'qPretensao';
+            } else if (pergunta === 'pretensao') {
+                nextId = (step2Data.carroTroca === 'Sim, possuo carro para troca') ? 'qValorCarro' : 'qEnviar';
+            } else if (pergunta === 'valorCarro') {
+                nextId = 'qEnviar';
+            }
+
+            if (nextId) {
+                var nextEl = document.getElementById(nextId);
+                nextEl.classList.remove('q-hidden');
+                setTimeout(function() {
+                    nextEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 80);
+            }
+        };
+
+        // ===== ENVIO FINAL =====
+        var _formSent = false;
+        document.getElementById('btnEnviar').addEventListener('click', function() {
+            if (_formSent) return;
+            _formSent = true;
+
+            var btn      = document.getElementById('btnEnviar');
+            var nome     = nomeEl.value.trim();
+            var email    = emailEl.value.trim();
+            var telefone = ddiEl.value + ' ' + telEl.value.trim(); // DDI sem "+" + número
+            var modelo   = getModelo();
+
+            btn.disabled = true;
+            btn.textContent = 'ENVIANDO...';
+
+            // Envia dados completos para Sheets
+            sendToSheets({
+                evento: 'step2_completo',
+                data: new Date().toLocaleString('pt-BR'),
+                nome: nome,
+                email: email,
+                telefone: telefone,
+                modelo: modelo,
+                carro_troca: step2Data.carroTroca,
+                pretensao:   step2Data.pretensao,
+                valor_carro: step2Data.valorCarro || '',
+                utm_source:   getParam('utm_source'),
+                utm_medium:   getParam('utm_medium'),
+                utm_campaign: getParam('utm_campaign'),
+                utm_term:     getParam('utm_term'),
+                utm_content:  getParam('utm_content'),
+                gclid:        getParam('gclid'),
+                fbclid:       getParam('fbclid'),
+                page_url:     window.location.href
+            });
+
+            // WhatsApp
             var msg = '*' + modelo + '*\n'
                 + '━━━━━━━━━━━━━━━━━━\n\n'
-                + '*Nome:* ' + nome + ' ' + sobrenome + '\n'
-                + '*Gênero:* ' + genero + '\n'
-                + '*Telefone:* ' + telefone + '\n'
-                + '*E-mail:* ' + email + '\n'
-                + '*CPF:* ' + cpf + '\n'
-                + '*CEP:* ' + cep + '\n'
-                + '*Pretensão de compra:* ' + pretensao + '\n'
-                + '*Modelo:* ' + modelo + '\n'
-                + '*Concessionária:* ' + concessionaria + '\n\n'
-                + '━━━━━━━━━━━━━━━━━━\n'
-                + 'Formulário preenchido via Landing Page Audi Q5';
+                + '*Nome:* '               + nome     + '\n'
+                + '*Telefone:* '           + telefone + '\n'
+                + '*E-mail:* '             + email    + '\n'
+                + '*Modelo:* '             + modelo   + '\n'
+                + '*Carro para troca:* '   + step2Data.carroTroca + '\n'
+                + '*Pretensão de compra:* '+ step2Data.pretensao  + '\n'
+                + (step2Data.valorCarro ? '*Valor do carro:* ' + step2Data.valorCarro + '\n' : '')
+                + '\n━━━━━━━━━━━━━━━━━━\n'
+                + 'Landing Page Audi Center Balneário Camboriú';
 
             var waURL = 'https://api.whatsapp.com/send?phone=' + WA_PHONE + '&text=' + encodeURIComponent(msg);
 
-            // Send to Sheets (fire and forget)
-            try { fetch(SHEET_URL + '?' + qs, { method: 'GET', mode: 'no-cors', keepalive: true }); } catch(e) {}
-
-
-            // Redirect to WhatsApp after 1s
-            setTimeout(function() {
-                window.location.href = waURL;
-                
-                // Re-enable button after 3s in case redirect was blocked
-                setTimeout(function() {
-                    btn.disabled = false;
-                    btn.textContent = 'ENVIAR';
-                    showStatus('', '');
-                }, 3000);
-            }, 1000);
+            setTimeout(function() { window.location.href = waURL; }, 800);
         });
-
-        function showStatus(msg, color) {
-            var st = document.getElementById('status');
-            st.textContent = msg;
-            st.style.color = color;
-        }
 
     })();
     </script>
